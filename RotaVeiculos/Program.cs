@@ -19,6 +19,8 @@ builder.Services.AddEntityFrameworkSqlServer()
 
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,6 +29,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(c =>
+{
+    c.AllowAnyHeader();
+    c.AllowAnyMethod();
+    c.AllowAnyOrigin();
+}
+);
 
 app.UseHttpsRedirection();
 

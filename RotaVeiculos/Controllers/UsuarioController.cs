@@ -5,7 +5,7 @@ using RotaVeiculos.Repositories.Interfaces;
 
 namespace RotaVeiculos.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/usuario")]
     [ApiController]
     public class UsuarioController : ControllerBase
     {
@@ -23,7 +23,7 @@ namespace RotaVeiculos.Controllers
             return Ok(usuarios);
         }
 
-        [HttpGet("buscarPorId/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Usuario>> BuscarPorId(int id)
         {
             Usuario usuario = await _usuarioRepositorio.BuscarPorId(id);
