@@ -65,5 +65,10 @@ namespace RotaVeiculos.Repositories
             await _dbContext.SaveChangesAsync();
             return true;
         }
+
+        public async Task<Usuario> VerificarLoginValido(string email, string senha)
+        {
+            return await _dbContext.Usuarios.FirstOrDefaultAsync(x => x.Email == email && x.Senha == senha);
+        }
     }
 }

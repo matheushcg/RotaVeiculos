@@ -9,5 +9,6 @@ namespace RotaVeiculos.Repositories.Interfaces
         Task<Usuario> Adicionar(Usuario usuario);
         Task<Usuario> Atualizar(int id, Usuario usuario);
         Task<bool> Deletar(int id);
+        Task<Usuario> VerificarLoginValido(string email, string senha);
     }
 }
