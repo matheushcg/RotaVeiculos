@@ -34,11 +34,6 @@ namespace RotaVeiculos.Repositories
         {
             Usuario usuarioPorId = await BuscarPorId(id);
 
-            if(usuarioPorId == null)
-            {
-                throw new Exception("Usuário não foi encontrado");
-            }
-
             usuarioPorId.Nome = usuario.Nome;
             usuarioPorId.Email = usuario.Email;
             usuarioPorId.Senha = usuario.Senha;
@@ -56,19 +51,14 @@ namespace RotaVeiculos.Repositories
         {
             Usuario usuarioPorId = await BuscarPorId(id);
 
-            if (usuarioPorId == null)
-            {
-                throw new Exception("Usuário não foi encontrado");
-            }
-
             _dbContext.Usuarios.Remove(usuarioPorId);
             await _dbContext.SaveChangesAsync();
             return true;
         }
 
-        public async Task<Usuario> VerificarLoginValido(string email, string senha)
+        public async Task<Usuario> VerificarLoginValido(string email)
         {
-            return await _dbContext.Usuarios.FirstOrDefaultAsync(x => x.Email == email && x.Senha == senha);
+            return await _dbContext.Usuarios.FirstOrDefaultAsync(x => x.Email == email);
         }
     }
 }

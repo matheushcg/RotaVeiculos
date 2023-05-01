@@ -12,12 +12,10 @@ namespace RotaVeiculos.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        private readonly IUsuarioRepositorio _usuarioRepositorio;
         private readonly IUsuarioService _usuarioService;
 
         public UsuarioController(IUsuarioRepositorio usuarioRepositorio, IUsuarioService usuarioService)
         {
-            _usuarioRepositorio = usuarioRepositorio;
             _usuarioService = usuarioService;
         }
 
@@ -25,7 +23,7 @@ namespace RotaVeiculos.Controllers
         [Authorize]
         public async Task<ActionResult<List<Usuario>>> BuscarTodosUsuarios()
         {
-            List <Usuario> usuarios = await _usuarioRepositorio.BuscarTodosUsuarios();
+            List <Usuario> usuarios = await _usuarioService.BuscarTodosUsuarios();
             return Ok(usuarios);
         }
 
@@ -33,15 +31,15 @@ namespace RotaVeiculos.Controllers
         [Authorize]
         public async Task<ActionResult<Usuario>> BuscarPorId(int id)
         {
-            Usuario usuario = await _usuarioRepositorio.BuscarPorId(id);
+            Usuario usuario = await _usuarioService.BuscarPorId(id);
             return Ok(usuario);
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<Usuario>> Cadastrar([FromBody] Usuario usuarioModel)
+        public async Task<ActionResult<Usuario>> Cadastrar([FromBody] Usuario usuarioPostRequest)
         {
-            Usuario usuario = await _usuarioRepositorio.Adicionar(usuarioModel);
+            Usuario usuario = await _usuarioService.Adicionar(usuarioPostRequest);
             return Ok(usuario);
         }
 
@@ -66,7 +64,7 @@ namespace RotaVeiculos.Controllers
         public async Task<ActionResult<Usuario>> Atualizar(int id, [FromBody] Usuario usuarioModel)
         {
             usuarioModel.Id = id;
-            Usuario usuario = await _usuarioRepositorio.Atualizar(id, usuarioModel);
+            Usuario usuario = await _usuarioService.Atualizar(id, usuarioModel);
             return Ok(usuario);
         }
 
@@ -74,7 +72,7 @@ namespace RotaVeiculos.Controllers
         [Authorize]
         public async Task<ActionResult<Usuario>> Deletar(int id)
         {
-            bool apagado = await _usuarioRepositorio.Deletar(id);
+            bool apagado = await _usuarioService.Deletar(id);
             return Ok(apagado);
         }
     }
