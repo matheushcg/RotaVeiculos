@@ -14,7 +14,7 @@ namespace RotaVeiculos.Controllers
     {
         private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(IUsuarioRepositorio usuarioRepositorio, IUsuarioService usuarioService)
+        public UsuarioController(IUsuarioService usuarioService)
         {
             _usuarioService = usuarioService;
         }

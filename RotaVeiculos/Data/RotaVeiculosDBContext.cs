@@ -13,10 +13,12 @@ namespace RotaVeiculos.Data
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Veiculo> Veiculos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UsuarioMap());
+            modelBuilder.ApplyConfiguration(new VeiculoMap());
             base.OnModelCreating(modelBuilder);
         }
     }

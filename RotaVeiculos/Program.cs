@@ -59,6 +59,8 @@ builder.Services.AddEntityFrameworkSqlServer()
 builder.Services.AddCors();
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IVeiculoRepositorio, VeiculoRepositorio>();
+builder.Services.AddScoped<IVeiculoService, VeiculoService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 var key = Encoding.ASCII.GetBytes(Settings.Secret);
