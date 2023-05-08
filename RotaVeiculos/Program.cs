@@ -62,6 +62,8 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IVeiculoRepositorio, VeiculoRepositorio>();
 builder.Services.AddScoped<IVeiculoService, VeiculoService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ICargoRepositorio, CargoRepositorio>();
+builder.Services.AddScoped<ICargoService, CargoService>();
 
 var key = Encoding.ASCII.GetBytes(Settings.Secret);
 

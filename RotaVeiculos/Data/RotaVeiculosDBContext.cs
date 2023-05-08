@@ -14,6 +14,7 @@ namespace RotaVeiculos.Data
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Veiculo> Veiculos { get; set; }
+        public DbSet<Cargo> Cargos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
