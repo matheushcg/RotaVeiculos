@@ -1,7 +1,9 @@
 ﻿using RotaVeiculos.Models;
 using RotaVeiculos.Repositories;
 using RotaVeiculos.Repositories.Interfaces;
+using RotaVeiculos.Requests.Veiculo;
 using RotaVeiculos.Services.Interfaces;
+using RotaVeiculos.ViewModels.Veiculo;
 
 namespace RotaVeiculos.Services
 {
@@ -14,27 +16,28 @@ namespace RotaVeiculos.Services
             _veiculoRepositorio = veiculoRepositorio;
         }
 
-        public async Task<Veiculo> BuscarPorId(int id)
+        public async Task<VeiculoViewModel> BuscarPorId(int id)
         {
             var response = await _veiculoRepositorio.BuscarPorId(id);
             return response;
         }
 
-        public async Task<List<Veiculo>> BuscarTodosVeiculos()
+        public async Task<List<VeiculoGridViewModel>> BuscarTodosVeiculos()
         {
             var response = await _veiculoRepositorio.BuscarTodosVeiculos();
             return response;
         }
 
-        public async Task<Veiculo> Adicionar(Veiculo veiculo)
+        public async Task<VeiculoViewModel> Adicionar(VeiculoRequest veiculo)
         {
             var response = await _veiculoRepositorio.Adicionar(veiculo);
             return response;
         }
 
-        public async Task<Veiculo> Atualizar(int id, Veiculo veiculo)
+        public async Task<VeiculoViewModel> Atualizar(int id, VeiculoRequest veiculo)
         {
-            Veiculo veiculoPorId = await BuscarPorId(id);
+            var veiculoViewModel = await BuscarPorId(id);
+            Veiculo veiculoPorId = new Veiculo(veiculoViewModel.Id, veiculoViewModel.Nome, veiculoViewModel.Preco, veiculoViewModel.Quilometragem, veiculoViewModel.Placa, veiculoViewModel.DocumentosEmDia, veiculoViewModel.Imagem);
 
             if (veiculoPorId != null)
             {
@@ -49,7 +52,8 @@ namespace RotaVeiculos.Services
 
         public async Task<bool> Deletar(int id)
         {
-            Veiculo veiculoPorId = await BuscarPorId(id);
+            var veiculoViewModel = await BuscarPorId(id);
+            Veiculo veiculoPorId = new Veiculo(veiculoViewModel.Id, veiculoViewModel.Nome, veiculoViewModel.Preco, veiculoViewModel.Quilometragem, veiculoViewModel.Placa, veiculoViewModel.DocumentosEmDia, veiculoViewModel.Imagem);
 
             if (veiculoPorId != null)
             {

@@ -1,13 +1,15 @@
-﻿namespace RotaVeiculos.Models
+﻿using RotaVeiculos.Models;
+
+namespace RotaVeiculos.ViewModels.Veiculo
 {
-    public class Veiculo
+    public class VeiculoViewModel
     {
-        public Veiculo()
+        public VeiculoViewModel()
         {
 
         }
 
-        public Veiculo(int id, string nome, double preco, double quilometragem, string placa, bool documentosEmDia, string imagem)
+        public VeiculoViewModel(int id, string nome, double preco, double quilometragem, string placa, bool documentosEmDia, string imagem)
         {
             Id = id;
             Nome = nome;
