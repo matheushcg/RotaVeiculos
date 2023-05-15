@@ -13,7 +13,10 @@ namespace RotaVeiculos.Data.Map
             builder.Property(x => x.Email).IsRequired().HasMaxLength(150);
             builder.Property(x => x.Senha).IsRequired().HasMaxLength(250);
             builder.Property(x => x.Cpf).IsRequired().HasMaxLength(11);
-            builder.Property(x => x.Cargo).IsRequired();
+            builder.HasOne(x => x.Cargo)
+                .WithMany()
+                .HasForeignKey(x => x.CargoId)
+                .HasConstraintName("FK_Cargo").OnDelete(DeleteBehavior.NoAction);
             builder.Property(x => x.Telefone).IsRequired();
         }
     }

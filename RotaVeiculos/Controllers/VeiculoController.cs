@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using RotaVeiculos.Models;
 using RotaVeiculos.Repositories.Interfaces;
+using RotaVeiculos.Requests.Veiculo;
 using RotaVeiculos.Services;
 using RotaVeiculos.Services.Interfaces;
+using RotaVeiculos.ViewModels.Usuario;
+using RotaVeiculos.ViewModels.Veiculo;
 
 namespace RotaVeiculos.Controllers
 {
@@ -20,34 +23,33 @@ namespace RotaVeiculos.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<List<Veiculo>>> BuscarTodosVeiculos()
+        public async Task<ActionResult<List<VeiculoGridViewModel>>> BuscarTodosVeiculos()
         {
-            List<Veiculo> veiculos = await _veiculoService.BuscarTodosVeiculos();
+            List<VeiculoGridViewModel> veiculos = await _veiculoService.BuscarTodosVeiculos();
             return Ok(veiculos);
         }
 
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<ActionResult<Veiculo>> BuscarPorId(int id)
+        public async Task<ActionResult<VeiculoViewModel>> BuscarPorId(int id)
         {
-            Veiculo veiculo = await _veiculoService.BuscarPorId(id);
+            VeiculoViewModel veiculo = await _veiculoService.BuscarPorId(id);
             return Ok(veiculo);
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<Veiculo>> Cadastrar([FromBody] Veiculo veiculoPostRequest)
+        public async Task<ActionResult<VeiculoViewModel>> Cadastrar([FromBody] VeiculoRequest veiculoPostRequest)
         {
-            Veiculo veiculo = await _veiculoService.Adicionar(veiculoPostRequest);
+            VeiculoViewModel veiculo = await _veiculoService.Adicionar(veiculoPostRequest);
             return Ok(veiculo);
         }
 
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<ActionResult<Veiculo>> Atualizar(int id, [FromBody] Veiculo veiculoModel)
+        public async Task<ActionResult<VeiculoViewModel>> Atualizar(int id, [FromBody] VeiculoRequest veiculoModel)
         {
-            veiculoModel.Id = id;
-            Veiculo veiculo = await _veiculoService.Atualizar(id, veiculoModel);
+            VeiculoViewModel veiculo = await _veiculoService.Atualizar(id, veiculoModel);
             return Ok(veiculo);
         }
 
