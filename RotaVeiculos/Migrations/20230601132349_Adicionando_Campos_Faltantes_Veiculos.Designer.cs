@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RotaVeiculos.Data;
 
@@ -10,9 +11,11 @@ using RotaVeiculos.Data;
 namespace RotaVeiculos.Migrations
 {
     [DbContext(typeof(RotaVeiculosDBContext))]
-    partial class RotaVeiculosDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230601132349_Adicionando_Campos_Faltantes_Veiculos")]
+    partial class Adicionando_Campos_Faltantes_Veiculos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
