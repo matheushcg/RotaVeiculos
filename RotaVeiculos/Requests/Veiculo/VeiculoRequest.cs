@@ -20,6 +20,18 @@ namespace RotaVeiculos.Requests.Veiculo
         public bool DocumentosEmDia { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public string Imagem { get; set; }
+        public string NomeImagem { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public string ImagemBase64 { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public int Ano { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public string TipoCombustivel { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public string Cor { get; set; }
     }
 }
