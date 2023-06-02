@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RotaVeiculos.Data;
 
@@ -10,9 +11,11 @@ using RotaVeiculos.Data;
 namespace RotaVeiculos.Migrations
 {
     [DbContext(typeof(RotaVeiculosDBContext))]
-    partial class RotaVeiculosDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230515181712_Criando_Tabela_Manutencao")]
+    partial class Criando_Tabela_Manutencao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,15 +168,6 @@ namespace RotaVeiculos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Ano")
-                        .HasMaxLength(4)
-                        .HasColumnType("int");
-
-                    b.Property<string>("Cor")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<bool>("DocumentosEmDia")
                         .HasColumnType("bit");
 
@@ -187,11 +181,6 @@ namespace RotaVeiculos.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("NomeImagem")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
                     b.Property<string>("Placa")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -204,11 +193,6 @@ namespace RotaVeiculos.Migrations
                     b.Property<double>("Quilometragem")
                         .HasMaxLength(15)
                         .HasColumnType("float");
-
-                    b.Property<string>("TipoCombustivel")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
