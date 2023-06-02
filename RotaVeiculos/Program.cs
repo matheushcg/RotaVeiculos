@@ -68,6 +68,8 @@ builder.Services.AddScoped<IFinanceiroRepositorio, FinanceiroRepositorio>();
 builder.Services.AddScoped<IFinanceiroService, FinanceiroService>();
 builder.Services.AddScoped<ITipoFinancaRepositorio, TipoFinancaRepositorio>();
 builder.Services.AddScoped<ITipoFinanceiroService, TipoFinanceiroService>();
+builder.Services.AddScoped<IManutencaoRepositorio, ManutencaoRepositorio>();
+builder.Services.AddScoped<IManutencaoService, ManutencaoService>();
 
 var key = Encoding.ASCII.GetBytes(Settings.Secret);
 
