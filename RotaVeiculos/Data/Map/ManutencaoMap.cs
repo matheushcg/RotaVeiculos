@@ -13,6 +13,8 @@ namespace RotaVeiculos.Data.Map
             builder.Property(x => x.Preco).IsRequired();
             builder.Property(x => x.ManutencaoRealizada).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Placa).IsRequired().HasMaxLength(8);
+            builder.Property(x => x.NomeImagem).IsRequired().HasMaxLength(250);
+            builder.Property(x => x.Imagem).IsRequired().HasMaxLength(250);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using RotaVeiculos.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace RotaVeiculos.ViewModels.Manutencao
 {
@@ -9,13 +10,16 @@ namespace RotaVeiculos.ViewModels.Manutencao
 
         }
 
-        public ManutencaoViewModel(int id, string nome, double preco, string manutencaoRealizada, string placa)
+        public ManutencaoViewModel(int id, string nome, double preco, string manutencaoRealizada, string placa, string nomeImagem, string imagem, string imagemBase64)
         {
             Id = id;
             Nome = nome;
             Preco = preco;
             ManutencaoRealizada = manutencaoRealizada;
             Placa = placa;
+            NomeImagem = nomeImagem;
+            Imagem = imagem;
+            ImagemBase64 = imagemBase64;
         }
 
         public int Id { get; set; }
@@ -23,5 +27,8 @@ namespace RotaVeiculos.ViewModels.Manutencao
         public double Preco { get; set; }
         public string ManutencaoRealizada { get; set; }
         public string Placa { get; set; }
+        public string NomeImagem { get; set; }
+        public string Imagem { get; set; }
+        public string ImagemBase64 { get; set; }
     }
 }

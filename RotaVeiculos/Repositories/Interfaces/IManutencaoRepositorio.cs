@@ -8,8 +8,8 @@ namespace RotaVeiculos.Repositories.Interfaces
     {
         Task<List<ManutencaoGridViewModel>> BuscarTodasManutencoes();
         Task<ManutencaoViewModel> BuscarPorId(int id);
-        Task<ManutencaoViewModel> Adicionar(ManutencaoRequest manutencao);
-        Task<ManutencaoViewModel> Atualizar(int id, ManutencaoRequest usuario);
+        Task<ManutencaoViewModel> Adicionar(ManutencaoRequest manutencao, string nomeArquivo);
+        Task<ManutencaoViewModel> Atualizar(int id, ManutencaoRequest usuario, string nomeArquivo);
         Task<bool> Deletar(int id);
     }
 }
