@@ -7,7 +7,7 @@ namespace RotaVeiculos.Services.Interfaces
     public interface IManutencaoService
     {
         Task<ManutencaoViewModel> BuscarPorId(int id);
-        Task<List<ManutencaoGridViewModel>> BuscarTodasManutencoes();
+        Task<List<ManutencaoGridViewModel>> BuscarTodasManutencoes(string nome);
         Task<ManutencaoViewModel> Adicionar(ManutencaoRequest manutencao);
         Task<ManutencaoViewModel> Atualizar(int id, ManutencaoRequest manutencao);
         Task<bool> Deletar(int id);

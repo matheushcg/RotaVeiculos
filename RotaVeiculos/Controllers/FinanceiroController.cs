@@ -22,9 +22,9 @@ namespace RotaVeiculos.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<List<FinancaGridViewModel>>> BuscarTodasFinancas()
+        public async Task<ActionResult<List<FinancaGridViewModel>>> BuscarTodasFinancas(string? descricao)
         {
-            List<FinancaGridViewModel> financas = await _financeiroService.BuscarTodasFinancas();
+            List<FinancaGridViewModel> financas = await _financeiroService.BuscarTodasFinancas(descricao);
             return Ok(financas);
         }
 

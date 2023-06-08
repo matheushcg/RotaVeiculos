@@ -27,9 +27,9 @@ namespace RotaVeiculos.Services
             return response;
         }
 
-        public async Task<List<ManutencaoGridViewModel>> BuscarTodasManutencoes()
+        public async Task<List<ManutencaoGridViewModel>> BuscarTodasManutencoes(string nome)
         {
-            var response = await _manutencaoRepositorio.BuscarTodasManutencoes();
+            var response = await _manutencaoRepositorio.BuscarTodasManutencoes(nome);
             return response;
         }
 

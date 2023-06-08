@@ -25,9 +25,9 @@ namespace RotaVeiculos.Repositories
             return manutencaoViewModel;
         }
 
-        public async Task<List<ManutencaoGridViewModel>> BuscarTodasManutencoes()
+        public async Task<List<ManutencaoGridViewModel>> BuscarTodasManutencoes(string nome)
         {
-            var manutencaoList = await _dbContext.Manutencao.ToListAsync();
+            var manutencaoList = await _dbContext.Manutencao.Where(x => nome != null ? x.Nome.Contains(nome) : 1 == 1).ToListAsync();
             var manutencaoGridViewModel = new List<ManutencaoGridViewModel>();
             foreach (var manutencao in manutencaoList)
             {

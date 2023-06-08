@@ -22,9 +22,9 @@ namespace RotaVeiculos.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<List<ManutencaoGridViewModel>>> BuscarTodasManutencoes()
+        public async Task<ActionResult<List<ManutencaoGridViewModel>>> BuscarTodasManutencoes(string? nome)
         {
-            List<ManutencaoGridViewModel> manutencao = await _manutencaoService.BuscarTodasManutencoes();
+            List<ManutencaoGridViewModel> manutencao = await _manutencaoService.BuscarTodasManutencoes(nome);
             return Ok(manutencao);
         }
 

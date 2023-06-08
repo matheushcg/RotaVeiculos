@@ -23,9 +23,9 @@ namespace RotaVeiculos.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<List<VeiculoGridViewModel>>> BuscarTodosVeiculos()
+        public async Task<ActionResult<List<VeiculoGridViewModel>>> BuscarTodosVeiculos(string? nome)
         {
-            List<VeiculoGridViewModel> veiculos = await _veiculoService.BuscarTodosVeiculos();
+            List<VeiculoGridViewModel> veiculos = await _veiculoService.BuscarTodosVeiculos(nome);
             return Ok(veiculos);
         }
 
