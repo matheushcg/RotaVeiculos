@@ -33,9 +33,9 @@ namespace RotaVeiculos.Repositories
             }
         }
 
-        public async Task<List<VeiculoGridViewModel>> BuscarTodosVeiculos()
+        public async Task<List<VeiculoGridViewModel>> BuscarTodosVeiculos(string nome)
         {
-            var veiculosList = await _dbContext.Veiculos.ToListAsync();
+            var veiculosList = await _dbContext.Veiculos.Where(x => nome != null ? x.Nome.Contains(nome) : 1 == 1).ToListAsync();
             var veiculosGridViewModel = new List<VeiculoGridViewModel>();
             foreach(var veiculo in veiculosList)
             {

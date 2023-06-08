@@ -9,7 +9,7 @@ namespace RotaVeiculos.Services.Interfaces
     {
         Task<UsuarioViewModel> BuscarPorId(int id);
         Task<ActionResult<dynamic>> Login(string email, string senha);
-        Task<List<UsuarioGridViewModel>> BuscarTodosUsuarios();
+        Task<List<UsuarioGridViewModel>> BuscarTodosUsuarios(string nome);
         Task<UsuarioViewModel> Adicionar(UsuarioRequest usuario);
         Task<UsuarioViewModel> Atualizar(int id, UsuarioRequest usuario);
         Task<bool> Deletar(int id);

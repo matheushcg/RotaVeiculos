@@ -27,9 +27,9 @@ namespace RotaVeiculos.Repositories
             return tipoFinancaViewModel;
         }
 
-        public async Task<List<FinancaGridViewModel>> BuscarTodasFinancas()
+        public async Task<List<FinancaGridViewModel>> BuscarTodasFinancas(string descricao)
         {
-            var financasList = await _dbContext.Financas.ToListAsync();
+            var financasList = await _dbContext.Financas.Where(x => descricao != null ? x.Descricao.Contains(descricao) : 1 == 1).ToListAsync();
             var tipoFinancasList = await _tipoFinancaRepositorio.BuscarTodosTiposFinanca();
             var financasGridViewModel = financasList.Select(x => new FinancaGridViewModel(x.Id, x.Descricao, x.Valor, tipoFinancasList.Where(y => y.Id == x.TipoFinancaId).FirstOrDefault().NomeTipoFinanca)).ToList();
             return financasGridViewModel;

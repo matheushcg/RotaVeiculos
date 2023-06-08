@@ -23,9 +23,9 @@ namespace RotaVeiculos.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<List<UsuarioGridViewModel>>> BuscarTodosUsuarios()
+        public async Task<ActionResult<List<UsuarioGridViewModel>>> BuscarTodosUsuarios(string? nome)
         {
-            List <UsuarioGridViewModel> usuarios = await _usuarioService.BuscarTodosUsuarios();
+            List <UsuarioGridViewModel> usuarios = await _usuarioService.BuscarTodosUsuarios(nome);
             return Ok(usuarios);
         }
 

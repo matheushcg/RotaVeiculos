@@ -6,7 +6,7 @@ namespace RotaVeiculos.Repositories.Interfaces
 {
     public interface IUsuarioRepositorio
     {
-        Task<List<UsuarioGridViewModel>> BuscarTodosUsuarios();
+        Task<List<UsuarioGridViewModel>> BuscarTodosUsuarios(string nome);
         Task<UsuarioViewModel> BuscarPorId(int id);
         Task<UsuarioViewModel> Adicionar(UsuarioRequest usuario);
         Task<UsuarioViewModel> Atualizar(int id, UsuarioRequest usuario);

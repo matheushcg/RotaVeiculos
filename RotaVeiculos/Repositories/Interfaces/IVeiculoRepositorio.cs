@@ -6,7 +6,7 @@ namespace RotaVeiculos.Repositories.Interfaces
 {
     public interface IVeiculoRepositorio
     {
-        Task<List<VeiculoGridViewModel>> BuscarTodosVeiculos();
+        Task<List<VeiculoGridViewModel>> BuscarTodosVeiculos(string nome);
         Task<VeiculoViewModel> BuscarPorId(int id);
         Task<VeiculoViewModel> Adicionar(VeiculoRequest veiculo, string nomeArquivo);
         Task<VeiculoViewModel> Atualizar(int id, VeiculoRequest usuario, string nomeArquivo);

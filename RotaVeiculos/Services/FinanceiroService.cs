@@ -24,9 +24,9 @@ namespace RotaVeiculos.Services
             return response;
         }
 
-        public async Task<List<FinancaGridViewModel>> BuscarTodasFinancas()
+        public async Task<List<FinancaGridViewModel>> BuscarTodasFinancas(string descricao)
         {
-            var response = await _financeiroRepositorio.BuscarTodasFinancas();
+            var response = await _financeiroRepositorio.BuscarTodasFinancas(descricao);
             return response;
         }
 

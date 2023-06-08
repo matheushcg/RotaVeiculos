@@ -6,7 +6,7 @@ namespace RotaVeiculos.Repositories.Interfaces
 {
     public interface IManutencaoRepositorio
     {
-        Task<List<ManutencaoGridViewModel>> BuscarTodasManutencoes();
+        Task<List<ManutencaoGridViewModel>> BuscarTodasManutencoes(string nome);
         Task<ManutencaoViewModel> BuscarPorId(int id);
         Task<ManutencaoViewModel> Adicionar(ManutencaoRequest manutencao, string nomeArquivo);
         Task<ManutencaoViewModel> Atualizar(int id, ManutencaoRequest usuario, string nomeArquivo);

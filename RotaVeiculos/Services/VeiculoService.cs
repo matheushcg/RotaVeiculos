@@ -26,9 +26,9 @@ namespace RotaVeiculos.Services
             return response;
         }
 
-        public async Task<List<VeiculoGridViewModel>> BuscarTodosVeiculos()
+        public async Task<List<VeiculoGridViewModel>> BuscarTodosVeiculos(string nome)
         {
-            var response = await _veiculoRepositorio.BuscarTodosVeiculos();
+            var response = await _veiculoRepositorio.BuscarTodosVeiculos(nome);
             return response;
         }
 
