@@ -19,7 +19,7 @@ namespace RotaVeiculos.Services
         public async Task<VeiculoViewModel> BuscarPorId(int id)
         {
             var response = await _veiculoRepositorio.BuscarPorId(id);
-            var caminho = @"C:\RotaVeiculosImages\" + response.Imagem;
+            var caminho = @"C:\Projetos\rota-veiculos-frontend\public\RotaVeiculosImages\" + response.Imagem;
             byte[] bytesImagem = File.ReadAllBytes(caminho);
             var imagemBase64 = Convert.ToBase64String(bytesImagem);
             response.ImagemBase64 = imagemBase64;
@@ -95,7 +95,7 @@ namespace RotaVeiculos.Services
             try
             {
                 byte[] base64Bytes = Convert.FromBase64String(arquivoBase64);
-                string pastaDestino = @"C:\RotaVeiculosImages";
+                string pastaDestino = @"C:\Projetos\rota-veiculos-frontend\public\RotaVeiculosImages";
                 string caminhoCompleto = Path.Combine(pastaDestino, nomeArquivo + extensao);
                 File.WriteAllBytes(caminhoCompleto, base64Bytes);
                 successFile = true;

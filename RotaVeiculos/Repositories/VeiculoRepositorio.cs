@@ -39,10 +39,10 @@ namespace RotaVeiculos.Repositories
             var veiculosGridViewModel = new List<VeiculoGridViewModel>();
             foreach(var veiculo in veiculosList)
             {
-                var caminho = @"C:\RotaVeiculosImages\" + veiculo.Imagem;
+                var caminho = @"C:\Projetos\rota-veiculos-frontend\public\RotaVeiculosImages\" + veiculo.Imagem;
                 byte[] bytesImagem = File.ReadAllBytes(caminho);
                 var imagemBase64 = Convert.ToBase64String(bytesImagem);
-                var veiculoToList = new VeiculoGridViewModel(veiculo.Id, veiculo.Nome, veiculo.Preco, veiculo.Placa, veiculo.Quilometragem, veiculo.Ano, imagemBase64);
+                var veiculoToList = new VeiculoGridViewModel(veiculo.Id, veiculo.Nome, veiculo.Preco, veiculo.Placa, veiculo.Quilometragem, veiculo.Ano, veiculo.Imagem);
                 veiculosGridViewModel.Add(veiculoToList);
             }
             return veiculosGridViewModel;

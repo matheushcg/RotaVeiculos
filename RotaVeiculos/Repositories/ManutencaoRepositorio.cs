@@ -31,7 +31,7 @@ namespace RotaVeiculos.Repositories
             var manutencaoGridViewModel = new List<ManutencaoGridViewModel>();
             foreach (var manutencao in manutencaoList)
             {
-                var caminho = @"C:\RotaVeiculosImages\" + manutencao.Imagem;
+                var caminho = @"C:\Projetos\rota-veiculos-frontend\public\RotaVeiculosImages\" + manutencao.Imagem;
                 byte[] bytesImagem = File.ReadAllBytes(caminho);
                 var imagemBase64 = Convert.ToBase64String(bytesImagem);
                 var manutencaoToList = new ManutencaoGridViewModel(manutencao.Id, manutencao.Nome, manutencao.Preco, manutencao.ManutencaoRealizada, imagemBase64);

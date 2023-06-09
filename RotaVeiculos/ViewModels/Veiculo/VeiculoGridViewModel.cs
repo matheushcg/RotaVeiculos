@@ -9,7 +9,7 @@ namespace RotaVeiculos.ViewModels.Veiculo
 
         }
 
-        public VeiculoGridViewModel(int id, string nome, double preco, string placa, double quilometragem, int ano, string imagemBase64)
+        public VeiculoGridViewModel(int id, string nome, double preco, string placa, double quilometragem, int ano, string imagem)
         {
             Id = id;
             Nome = nome;
@@ -17,7 +17,7 @@ namespace RotaVeiculos.ViewModels.Veiculo
             Placa = placa;
             Quilometragem = quilometragem;
             Ano = ano;
-            ImagemBase64 = imagemBase64;
+            Imagem = imagem;
         }
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -25,6 +25,6 @@ namespace RotaVeiculos.ViewModels.Veiculo
         public string Placa { get; set; }
         public double Quilometragem { get; set; }
         public int Ano { get; set; }
-        public string ImagemBase64 { get; set; }
+        public string Imagem { get; set; }
     }
 }
