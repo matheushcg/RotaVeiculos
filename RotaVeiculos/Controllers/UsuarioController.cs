@@ -53,7 +53,7 @@ namespace RotaVeiculos.Controllers
 
             if(response == null)
             {
-                return NotFound(new {message = "Email ou Senha inválidos"});
+                return null;
             }
             else
             {

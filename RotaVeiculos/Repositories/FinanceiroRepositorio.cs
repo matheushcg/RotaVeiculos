@@ -23,7 +23,7 @@ namespace RotaVeiculos.Repositories
         {
             var financa = await _dbContext.Financas.FirstOrDefaultAsync(x => x.Id == id);
             var tipoFinanca = await _tipoFinancaRepositorio.BuscarPorId(financa.TipoFinancaId);
-            var tipoFinancaViewModel = new FinancaViewModel(financa.Id, financa.Descricao, tipoFinanca.Id, tipoFinanca.Id, tipoFinanca.NomeTipoFinanca);
+            var tipoFinancaViewModel = new FinancaViewModel(financa.Id, financa.Descricao, financa.Valor, tipoFinanca.Id, tipoFinanca.NomeTipoFinanca);
             return tipoFinancaViewModel;
         }
 

@@ -103,7 +103,7 @@ namespace RotaVeiculos.Services
             }
             else
             {
-                throw new Exception("Usuário não encontrado");
+                return null;
             }
         }
     }
