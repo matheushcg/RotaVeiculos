@@ -18,6 +18,7 @@ namespace RotaVeiculos.Data
         public DbSet<TipoFinanca> TiposFinanca { get; set; }
         public DbSet<Financa> Financas { get; set; }
         public DbSet<Manutencao> Manutencao { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,6 +28,7 @@ namespace RotaVeiculos.Data
             modelBuilder.ApplyConfiguration(new TipoFinancaMap());
             modelBuilder.ApplyConfiguration(new FinancaMap());
             modelBuilder.ApplyConfiguration(new ManutencaoMap());
+            modelBuilder.ApplyConfiguration(new ClienteMap());
             base.OnModelCreating(modelBuilder);
         }
     }
