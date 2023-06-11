@@ -28,7 +28,8 @@ namespace RotaVeiculos.Repositories
         public async Task<List<UsuarioGridViewModel>> BuscarTodosUsuarios(string nome)
         {
             var usuariosList = await _dbContext.Usuarios.Where(x => nome != null ? x.Nome.Contains(nome) : 1 == 1).ToListAsync();
-            var usuariosGridViewModel = usuariosList.Select(x => new UsuarioGridViewModel(x.Id, x.Nome, x.Email, x.Telefone)).ToList();
+            var cargos = await _dbContext.Cargos.ToListAsync();
+            var usuariosGridViewModel = usuariosList.Select(x => new UsuarioGridViewModel(x.Id, x.Nome, x.Email, x.Cpf, x.Telefone, x.CargoId, cargos.Where(y => y.Id == x.CargoId).FirstOrDefault().NomeCargo)).ToList();
             return usuariosGridViewModel;
         }
         public async Task<UsuarioViewModel> Adicionar(UsuarioRequest request)
