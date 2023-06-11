@@ -10,25 +10,25 @@ namespace RotaVeiculos.ViewModels.Manutencao
 
         }
 
-        public ManutencaoViewModel(int id, string nome, double preco, string manutencaoRealizada, string placa, string nomeImagem, string imagem, string imagemBase64)
+        public ManutencaoViewModel(int id, double preco, string manutencaoRealizada, int veiculoId, string veiculoNome, string veiculoPlaca, string veiculoImagem, string veiculoNomeImagem)
         {
             Id = id;
-            Nome = nome;
             Preco = preco;
             ManutencaoRealizada = manutencaoRealizada;
-            Placa = placa;
-            NomeImagem = nomeImagem;
-            Imagem = imagem;
-            ImagemBase64 = imagemBase64;
+            VeiculoId = veiculoId;
+            VeiculoNome = veiculoNome;
+            VeiculoPlaca = veiculoPlaca;
+            VeiculoImagem = veiculoImagem;
+            VeiculoNomeImagem = veiculoNomeImagem;
         }
 
         public int Id { get; set; }
-        public string Nome { get; set; }
         public double Preco { get; set; }
         public string ManutencaoRealizada { get; set; }
-        public string Placa { get; set; }
-        public string NomeImagem { get; set; }
-        public string Imagem { get; set; }
-        public string ImagemBase64 { get; set; }
+        public int VeiculoId { get; set; }
+        public string VeiculoNome { get; set; }
+        public string VeiculoPlaca { get; set; }
+        public string VeiculoImagem { get; set; }
+        public string VeiculoNomeImagem { get; set; }
     }
 }

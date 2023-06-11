@@ -21,43 +21,40 @@ namespace RotaVeiculos.Repositories
         public async Task<ManutencaoViewModel> BuscarPorId(int id)
         {
             var manutencao = await _dbContext.Manutencao.FirstOrDefaultAsync(x => x.Id == id);
-            var manutencaoViewModel = new ManutencaoViewModel(manutencao.Id, manutencao.Nome, manutencao.Preco, manutencao.ManutencaoRealizada, manutencao.Placa, manutencao.NomeImagem, manutencao.Imagem, null);
+            var veiculo = await _dbContext.Veiculos.FirstOrDefaultAsync(x => x.Id == manutencao.VeiculoId);
+            var manutencaoViewModel = new ManutencaoViewModel(manutencao.Id, manutencao.Preco, manutencao.ManutencaoRealizada, manutencao.VeiculoId, veiculo.Nome, veiculo.Placa, veiculo.Imagem, veiculo.NomeImagem);
             return manutencaoViewModel;
         }
 
-        public async Task<List<ManutencaoGridViewModel>> BuscarTodasManutencoes(string nome)
+        public async Task<List<ManutencaoGridViewModel>> BuscarTodasManutencoes(string manutencaoRealizada)
         {
-            var manutencaoList = await _dbContext.Manutencao.Where(x => nome != null ? x.Nome.Contains(nome) : 1 == 1).ToListAsync();
+            var manutencaoList = await _dbContext.Manutencao.Where(x => manutencaoRealizada != null ? x.ManutencaoRealizada.Contains(manutencaoRealizada) : 1 == 1).ToListAsync();
             var manutencaoGridViewModel = new List<ManutencaoGridViewModel>();
             foreach (var manutencao in manutencaoList)
             {
-                var caminho = @"C:\Projetos\rota-veiculos-frontend\public\RotaVeiculosImages\" + manutencao.Imagem;
-                byte[] bytesImagem = File.ReadAllBytes(caminho);
-                var imagemBase64 = Convert.ToBase64String(bytesImagem);
-                var manutencaoToList = new ManutencaoGridViewModel(manutencao.Id, manutencao.Nome, manutencao.Preco, manutencao.ManutencaoRealizada, imagemBase64);
+                var veiculo = await _dbContext.Veiculos.FirstOrDefaultAsync(x => x.Id == manutencao.VeiculoId);
+                var manutencaoToList = new ManutencaoGridViewModel(manutencao.Id, manutencao.Preco, manutencao.ManutencaoRealizada, manutencao.VeiculoId, veiculo.Nome, veiculo.Imagem, veiculo.NomeImagem);
                 manutencaoGridViewModel.Add(manutencaoToList);
             }
             return manutencaoGridViewModel;
         }
 
-        public async Task<ManutencaoViewModel> Adicionar(ManutencaoRequest request, string nomeArquivo)
+        public async Task<ManutencaoViewModel> Adicionar(ManutencaoRequest request)
         {
-            var manutencao = new Manutencao(0, request.Nome, request.Preco, request.ManutencaoRealizada, request.Placa, request.NomeImagem, nomeArquivo);
+            var manutencao = new Manutencao(0, request.Preco, request.ManutencaoRealizada, request.VeiculoId);
             await _dbContext.Manutencao.AddAsync(manutencao);
             await _dbContext.SaveChangesAsync();
             var manutencaoViewModel = await BuscarPorId(manutencao.Id);
             return manutencaoViewModel;
         }
-        public async Task<ManutencaoViewModel> Atualizar(int id, ManutencaoRequest manutencao, string nomeArquivo)
+        public async Task<ManutencaoViewModel> Atualizar(int id, ManutencaoRequest manutencao)
         {
             var manutencaoViewModel = await BuscarPorId(id);
-            Manutencao manutencaoPorId = new Manutencao(manutencaoViewModel.Id, manutencaoViewModel.Nome, manutencaoViewModel.Preco, manutencaoViewModel.ManutencaoRealizada, manutencaoViewModel.Placa, manutencaoViewModel.NomeImagem, manutencaoViewModel.Imagem);
+            Manutencao manutencaoPorId = new Manutencao(manutencaoViewModel.Id, manutencaoViewModel.Preco, manutencaoViewModel.ManutencaoRealizada, manutencaoViewModel.VeiculoId);
 
-            manutencaoPorId.Nome = manutencao.Nome;
             manutencaoPorId.Preco = manutencao.Preco;
             manutencaoPorId.ManutencaoRealizada = manutencao.ManutencaoRealizada;
-            manutencaoPorId.Placa = manutencao.Placa;
-            manutencaoPorId.Imagem = nomeArquivo;
+            manutencaoPorId.VeiculoId = manutencao.VeiculoId;
 
             _dbContext.ChangeTracker.Clear();
 
@@ -71,7 +68,7 @@ namespace RotaVeiculos.Repositories
         public async Task<bool> Deletar(int id)
         {
             var manutencaoViewModel = await BuscarPorId(id);
-            Manutencao manutencaoPorId = new Manutencao(manutencaoViewModel.Id, manutencaoViewModel.Nome, manutencaoViewModel.Preco, manutencaoViewModel.ManutencaoRealizada, manutencaoViewModel.Placa, manutencaoViewModel.NomeImagem, manutencaoViewModel.Imagem);
+            Manutencao manutencaoPorId = new Manutencao(manutencaoViewModel.Id, manutencaoViewModel.Preco, manutencaoViewModel.ManutencaoRealizada, manutencaoViewModel.VeiculoId);
 
             _dbContext.ChangeTracker.Clear();
             _dbContext.Manutencao.Remove(manutencaoPorId);
