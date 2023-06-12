@@ -11,7 +11,7 @@ namespace RotaVeiculos.Services.Interfaces
         Task<ActionResult<dynamic>> Login(string email, string senha);
         Task<List<UsuarioGridViewModel>> BuscarTodosUsuarios(string nome);
         Task<UsuarioViewModel> Adicionar(UsuarioRequest usuario);
-        Task<UsuarioViewModel> Atualizar(int id, UsuarioRequest usuario);
+        Task<UsuarioViewModel> Atualizar(int id, UsuarioUpdateRequest usuario);
         Task<bool> Deletar(int id);
         string EncriptarSenha(string senha);
         bool VerificarSenha(string senha, Usuario usuario);

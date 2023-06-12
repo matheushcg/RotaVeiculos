@@ -33,7 +33,7 @@ namespace RotaVeiculos.Repositories
         }
         public async Task<ClienteViewModel> Adicionar(ClienteRequest request)
         {
-            var cliente = new Cliente(0, request.Nome, request.Email, request.Cpf, request.Telefone);
+            var cliente = new Cliente(0, request.Nome, request.Email, request.Cpf.Replace(".", "").Replace("-", ""), request.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", ""));
             await _dbContext.Clientes.AddAsync(cliente);
             await _dbContext.SaveChangesAsync();
             var clienteViewModel = await BuscarPorId(cliente.Id);
@@ -47,8 +47,8 @@ namespace RotaVeiculos.Repositories
 
             clientePorId.Nome = cliente.Nome;
             clientePorId.Email = cliente.Email;
-            clientePorId.Cpf = cliente.Cpf;
-            clientePorId.Telefone = cliente.Telefone;
+            clientePorId.Cpf = cliente.Cpf.Replace(".", "").Replace("-", "");
+            clientePorId.Telefone = cliente.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
 
             _dbContext.ChangeTracker.Clear();
 

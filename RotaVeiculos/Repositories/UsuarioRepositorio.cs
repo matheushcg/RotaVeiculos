@@ -34,14 +34,14 @@ namespace RotaVeiculos.Repositories
         }
         public async Task<UsuarioViewModel> Adicionar(UsuarioRequest request)
         {
-            var usuario = new Usuario(0, request.Nome, request.Email, request.Senha, request.Cpf, request.Telefone, request.CargoId);
+            var usuario = new Usuario(0, request.Nome, request.Email, request.Senha, request.Cpf.Replace(".", "").Replace("-", ""), request.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", ""), request.CargoId);
             await _dbContext.Usuarios.AddAsync(usuario);
             await _dbContext.SaveChangesAsync();
             var usuarioViewModel = await BuscarPorId(usuario.Id);
             return usuarioViewModel;
         }
 
-        public async Task<UsuarioViewModel> Atualizar(int id, UsuarioRequest usuario)
+        public async Task<UsuarioViewModel> Atualizar(int id, UsuarioUpdateRequest usuario)
         {
             var usuarioViewModel = await BuscarPorId(id);
             Usuario usuarioPorId = new Usuario(usuarioViewModel.Id, usuarioViewModel.Nome, usuarioViewModel.Email, usuarioViewModel.Senha, usuarioViewModel.Cpf, usuarioViewModel.Telefone, usuarioViewModel.CargoId);
@@ -50,9 +50,9 @@ namespace RotaVeiculos.Repositories
 
             usuarioPorId.Nome = usuario.Nome;
             usuarioPorId.Email = usuario.Email;
-            usuarioPorId.Senha = usuario.Senha;
-            usuarioPorId.Cpf = usuario.Cpf;
-            usuarioPorId.Telefone = usuario.Telefone;
+            usuarioPorId.Senha = usuario.AtualizarSenha ? usuario.Senha : usuarioPorId.Senha;
+            usuarioPorId.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+            usuarioPorId.Telefone = usuario.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
             usuarioPorId.CargoId = cargo.Id;
 
             _dbContext.ChangeTracker.Clear();

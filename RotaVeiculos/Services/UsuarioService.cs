@@ -41,10 +41,13 @@ namespace RotaVeiculos.Services
             return response;
         }
 
-        public async Task<UsuarioViewModel> Atualizar(int id, UsuarioRequest usuario)
+        public async Task<UsuarioViewModel> Atualizar(int id, UsuarioUpdateRequest usuario)
         {
-            var senhaCriptografada = EncriptarSenha(usuario.Senha);
-            usuario.Senha = senhaCriptografada;
+            if(usuario.AtualizarSenha)
+            {
+                var senhaCriptografada = EncriptarSenha(usuario.Senha);
+                usuario.Senha = senhaCriptografada;
+            }
             var usuarioViewModel = await BuscarPorId(id);
             Usuario usuarioPorId = new Usuario(usuarioViewModel.Id, usuarioViewModel.Email, usuarioViewModel.Nome, usuarioViewModel.Senha, usuarioViewModel.Cpf, usuarioViewModel.Telefone, usuarioViewModel.CargoId);
 

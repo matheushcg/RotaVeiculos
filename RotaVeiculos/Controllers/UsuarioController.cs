@@ -63,7 +63,7 @@ namespace RotaVeiculos.Controllers
 
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<ActionResult<UsuarioViewModel>> Atualizar(int id, [FromBody] UsuarioRequest usuarioModel)
+        public async Task<ActionResult<UsuarioViewModel>> Atualizar(int id, [FromBody] UsuarioUpdateRequest usuarioModel)
         {
             UsuarioViewModel usuario = await _usuarioService.Atualizar(id, usuarioModel);
             return Ok(usuario);
