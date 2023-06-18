@@ -67,5 +67,16 @@ namespace RotaVeiculos.Services
                 throw new Exception("Finança não foi encontrada");
             }
         }
+
+        public async Task<FinancaTotaisViewModel> BuscarTotais()
+        {
+            var response = await _financeiroRepositorio.BuscarTotais();
+            var entradas = response.Where(x => x.TipoFinancaId == 1).Select(x => x.Valor).Sum();
+            var saidas = response.Where(x => x.TipoFinancaId == 2).Select(x => x.Valor).Sum();
+            var total = entradas - saidas;
+
+            var financaTotaisViewModel = new FinancaTotaisViewModel(entradas, saidas, total);
+            return financaTotaisViewModel;
+        }
     }
 }

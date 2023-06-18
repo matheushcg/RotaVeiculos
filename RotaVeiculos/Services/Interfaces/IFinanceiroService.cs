@@ -11,5 +11,6 @@ namespace RotaVeiculos.Services.Interfaces
         Task<FinancaViewModel> Adicionar(FinancaRequest usuario);
         Task<FinancaViewModel> Atualizar(int id, FinancaRequest usuario);
         Task<bool> Deletar(int id);
+        Task<FinancaTotaisViewModel> BuscarTotais();
     }
 }

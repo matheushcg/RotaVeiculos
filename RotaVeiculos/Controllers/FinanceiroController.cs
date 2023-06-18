@@ -59,5 +59,13 @@ namespace RotaVeiculos.Controllers
             bool apagado = await _financeiroService.Deletar(id);
             return Ok(apagado);
         }
+
+        [HttpGet("buscarTotais")]
+        [Authorize]
+        public async Task<ActionResult<FinancaTotaisViewModel>> BuscarTotais()
+        {
+            FinancaTotaisViewModel totais = await _financeiroService.BuscarTotais();
+            return Ok(totais);
+        }
     }
 }

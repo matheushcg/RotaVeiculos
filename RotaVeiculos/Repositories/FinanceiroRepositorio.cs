@@ -73,5 +73,11 @@ namespace RotaVeiculos.Repositories
             await _dbContext.SaveChangesAsync();
             return true;
         }
+
+        public async Task<List<Financa>> BuscarTotais()
+        {
+            var financasList = await _dbContext.Financas.ToListAsync();
+            return financasList;
+        }
     }
 }
