@@ -62,6 +62,14 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IVeiculoRepositorio, VeiculoRepositorio>();
 builder.Services.AddScoped<IVeiculoService, VeiculoService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ICargoRepositorio, CargoRepositorio>();
+builder.Services.AddScoped<ICargoService, CargoService>();
+builder.Services.AddScoped<IFinanceiroRepositorio, FinanceiroRepositorio>();
+builder.Services.AddScoped<IFinanceiroService, FinanceiroService>();
+builder.Services.AddScoped<ITipoFinancaRepositorio, TipoFinancaRepositorio>();
+builder.Services.AddScoped<ITipoFinanceiroService, TipoFinanceiroService>();
+builder.Services.AddScoped<IManutencaoRepositorio, ManutencaoRepositorio>();
+builder.Services.AddScoped<IManutencaoService, ManutencaoService>();
 
 var key = Encoding.ASCII.GetBytes(Settings.Secret);
 

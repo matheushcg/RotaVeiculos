@@ -14,7 +14,11 @@ namespace RotaVeiculos.Data.Map
             builder.Property(x => x.Quilometragem).IsRequired().HasMaxLength(15);
             builder.Property(x => x.Placa).IsRequired().HasMaxLength(10);
             builder.Property(x => x.DocumentosEmDia).IsRequired();
+            builder.Property(x => x.NomeImagem).IsRequired().HasMaxLength(250);
             builder.Property(x => x.Imagem).IsRequired().HasMaxLength(250);
+            builder.Property(x => x.Ano).IsRequired().HasMaxLength(4);
+            builder.Property(x => x.TipoCombustivel).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.Cor).IsRequired().HasMaxLength(50);
         }
     }
 }

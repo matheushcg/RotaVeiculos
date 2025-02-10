@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using RotaVeiculos.Models;
 using RotaVeiculos.Repositories;
 using RotaVeiculos.Repositories.Interfaces;
+using RotaVeiculos.Requests.Usuario;
 using RotaVeiculos.Services.Interfaces;
+using RotaVeiculos.ViewModels.Usuario;
 using System.Net;
 
 namespace RotaVeiculos.Services
@@ -19,19 +21,19 @@ namespace RotaVeiculos.Services
             _tokenService = tokenService;
         }
 
-        public async Task<Usuario> BuscarPorId(int id)
+        public async Task<UsuarioViewModel> BuscarPorId(int id)
         {
             var response = await _usuarioRepositorio.BuscarPorId(id);
             return response;
         }
 
-        public async Task<List<Usuario>> BuscarTodosUsuarios()
+        public async Task<List<UsuarioGridViewModel>> BuscarTodosUsuarios(string nome)
         {
-            var response = await _usuarioRepositorio.BuscarTodosUsuarios();
+            var response = await _usuarioRepositorio.BuscarTodosUsuarios(nome);
             return response;
         }
 
-        public async Task<Usuario> Adicionar(Usuario usuario)
+        public async Task<UsuarioViewModel> Adicionar(UsuarioRequest usuario)
         {
             var senhaCriptografada = EncriptarSenha(usuario.Senha);
             usuario.Senha = senhaCriptografada;
@@ -39,11 +41,12 @@ namespace RotaVeiculos.Services
             return response;
         }
 
-        public async Task<Usuario> Atualizar(int id, Usuario usuario)
+        public async Task<UsuarioViewModel> Atualizar(int id, UsuarioRequest usuario)
         {
             var senhaCriptografada = EncriptarSenha(usuario.Senha);
             usuario.Senha = senhaCriptografada;
-            Usuario usuarioPorId = await BuscarPorId(id);
+            var usuarioViewModel = await BuscarPorId(id);
+            Usuario usuarioPorId = new Usuario(usuarioViewModel.Id, usuarioViewModel.Email, usuarioViewModel.Nome, usuarioViewModel.Senha, usuarioViewModel.Cpf, usuarioViewModel.Telefone, usuarioViewModel.CargoId);
 
             if (usuarioPorId != null)
             {
@@ -58,7 +61,8 @@ namespace RotaVeiculos.Services
 
         public async Task<bool> Deletar(int id)
         {
-            Usuario usuarioPorId = await BuscarPorId(id);
+            var usuarioViewModel = await BuscarPorId(id);
+            Usuario usuarioPorId = new Usuario(usuarioViewModel.Id, usuarioViewModel.Email, usuarioViewModel.Nome, usuarioViewModel.Senha, usuarioViewModel.Cpf, usuarioViewModel.Telefone, usuarioViewModel.CargoId);
 
             if (usuarioPorId != null)
             {

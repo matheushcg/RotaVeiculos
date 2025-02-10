@@ -21,6 +21,110 @@ namespace RotaVeiculos.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("RotaVeiculos.Models.Cargo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("NomeCargo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cargos");
+                });
+
+            modelBuilder.Entity("RotaVeiculos.Models.Financa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("TipoFinancaId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Valor")
+                        .HasMaxLength(15)
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TipoFinancaId");
+
+                    b.ToTable("Financas");
+                });
+
+            modelBuilder.Entity("RotaVeiculos.Models.Manutencao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Imagem")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("ManutencaoRealizada")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("NomeImagem")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Placa")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
+                    b.Property<double>("Preco")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Manutencao");
+                });
+
+            modelBuilder.Entity("RotaVeiculos.Models.TipoFinanca", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("NomeTipoFinanca")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TiposFinanca");
+                });
+
             modelBuilder.Entity("RotaVeiculos.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -29,7 +133,7 @@ namespace RotaVeiculos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Cargo")
+                    b.Property<int>("CargoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Cpf")
@@ -58,6 +162,8 @@ namespace RotaVeiculos.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CargoId");
+
                     b.ToTable("Usuarios");
                 });
 
@@ -68,6 +174,15 @@ namespace RotaVeiculos.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Ano")
+                        .HasMaxLength(4)
+                        .HasColumnType("int");
+
+                    b.Property<string>("Cor")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("DocumentosEmDia")
                         .HasColumnType("bit");
@@ -82,6 +197,11 @@ namespace RotaVeiculos.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("NomeImagem")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
                     b.Property<string>("Placa")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -95,9 +215,38 @@ namespace RotaVeiculos.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("float");
 
+                    b.Property<string>("TipoCombustivel")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Veiculos");
+                });
+
+            modelBuilder.Entity("RotaVeiculos.Models.Financa", b =>
+                {
+                    b.HasOne("RotaVeiculos.Models.TipoFinanca", "TipoFinanca")
+                        .WithMany()
+                        .HasForeignKey("TipoFinancaId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_Tipo_Financeiro");
+
+                    b.Navigation("TipoFinanca");
+                });
+
+            modelBuilder.Entity("RotaVeiculos.Models.Usuario", b =>
+                {
+                    b.HasOne("RotaVeiculos.Models.Cargo", "Cargo")
+                        .WithMany()
+                        .HasForeignKey("CargoId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_Cargo");
+
+                    b.Navigation("Cargo");
                 });
 #pragma warning restore 612, 618
         }

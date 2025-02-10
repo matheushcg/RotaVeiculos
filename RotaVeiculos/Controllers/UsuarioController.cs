@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RotaVeiculos.Models;
 using RotaVeiculos.Repositories.Interfaces;
-using RotaVeiculos.Requests;
+using RotaVeiculos.Requests.Login;
+using RotaVeiculos.Requests.Usuario;
 using RotaVeiculos.Services.Interfaces;
+using RotaVeiculos.ViewModels.Usuario;
 
 namespace RotaVeiculos.Controllers
 {
@@ -21,25 +23,25 @@ namespace RotaVeiculos.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<List<Usuario>>> BuscarTodosUsuarios()
+        public async Task<ActionResult<List<UsuarioGridViewModel>>> BuscarTodosUsuarios(string? nome)
         {
-            List <Usuario> usuarios = await _usuarioService.BuscarTodosUsuarios();
+            List <UsuarioGridViewModel> usuarios = await _usuarioService.BuscarTodosUsuarios(nome);
             return Ok(usuarios);
         }
 
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<ActionResult<Usuario>> BuscarPorId(int id)
+        public async Task<ActionResult<UsuarioViewModel>> BuscarPorId(int id)
         {
-            Usuario usuario = await _usuarioService.BuscarPorId(id);
+            UsuarioViewModel usuario = await _usuarioService.BuscarPorId(id);
             return Ok(usuario);
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<Usuario>> Cadastrar([FromBody] Usuario usuarioPostRequest)
+        public async Task<ActionResult<UsuarioViewModel>> Cadastrar([FromBody] UsuarioRequest usuarioPostRequest)
         {
-            Usuario usuario = await _usuarioService.Adicionar(usuarioPostRequest);
+            UsuarioViewModel usuario = await _usuarioService.Adicionar(usuarioPostRequest);
             return Ok(usuario);
         }
 
@@ -61,10 +63,9 @@ namespace RotaVeiculos.Controllers
 
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<ActionResult<Usuario>> Atualizar(int id, [FromBody] Usuario usuarioModel)
+        public async Task<ActionResult<UsuarioViewModel>> Atualizar(int id, [FromBody] UsuarioRequest usuarioModel)
         {
-            usuarioModel.Id = id;
-            Usuario usuario = await _usuarioService.Atualizar(id, usuarioModel);
+            UsuarioViewModel usuario = await _usuarioService.Atualizar(id, usuarioModel);
             return Ok(usuario);
         }
 

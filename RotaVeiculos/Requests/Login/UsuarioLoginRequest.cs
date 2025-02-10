@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RotaVeiculos.Requests
+namespace RotaVeiculos.Requests.Login
 {
     public class UsuarioLoginRequest
     {
